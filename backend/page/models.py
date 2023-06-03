@@ -14,7 +14,7 @@ class Specializations(Model):
         verbose_name = 'specialization'
         verbose_name_plural = 'specializations'
 
-class Doctors(Model, ):
+class Doctors(Model):
 
     first_name = CharField(
         'First Name',
@@ -79,6 +79,41 @@ class Doctors(Model, ):
         upload_to='doctors-profile-pictures'
     )
 
+    monday = BooleanField(
+        'Monday',
+        default=False
+    )
+
+    tuesday = BooleanField(
+        'Tuesday',
+        default=False
+    )
+
+    wednesday = BooleanField(
+        'Wednesday',
+        default=False
+    )
+
+    thursday = BooleanField(
+        'Thursday',
+        default=False
+    )
+
+    friday = BooleanField(
+        'Friday',
+        default=False
+    )
+
+    saturday = BooleanField(
+        'Saturday',
+        default=False
+    )
+
+    sunday = BooleanField(
+        'Sunday',
+        default=False
+    )
+
     status = BooleanField(
         'Status',
         default=False
@@ -134,8 +169,61 @@ class Doctors(Model, ):
     )
 
     def __str__(self):
-        return f'{self.first_name}'
+        return f'{self.first_name} {self.last_name}'
     
     class Meta:
         verbose_name = 'doctor'
         verbose_name_plural = 'doctors'
+
+class ServicesCategories(Model):
+
+    name = CharField(
+        'Name',
+        max_length=100
+    )
+
+    def __str__(self):
+        return f'{self.name}'
+    
+    class Meta:
+        verbose_name = 'services category'
+        verbose_name_plural = 'services categories'
+
+class Services(Model):
+
+    name = CharField(
+        'Name',
+        max_length=50
+    )
+
+    category = ForeignKey(
+        ServicesCategories,
+        on_delete=CASCADE
+    )
+
+    doctors = ForeignKey(
+        Doctors,
+        on_delete=CASCADE
+    )
+
+    short_description = TextField(
+        'Short Description'
+    )
+
+    icon = ImageField(
+        'Icon',
+        upload_to='services-icons'
+    )
+
+    status = BooleanField(
+        'Status',
+        default=False
+    )
+
+    def __str__(self):
+        return f'{self.name}'
+    
+    class Meta:
+
+        verbose_name = 'service'
+        verbose_name_plural = 'services'
