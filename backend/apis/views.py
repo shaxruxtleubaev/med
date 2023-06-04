@@ -4,13 +4,15 @@ from page.models import (
     Specializations,
     Doctors, 
     ServicesCategories,
-    Services
+    Services, 
+    Patients
 )
 from .serializers import (
     SpecializationsSerializer,
     DoctorsSerializer,
     ServicesCategoriesSerializer,
     ServicesSerializer,
+    PatientsSerializer,
     UserSerializer,
 )
 
@@ -33,6 +35,11 @@ class ServicesViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
     queryset = Services.objects.all()
     serializer_class = ServicesSerializer
+
+class PatientsViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAdminUser,)
+    queryset = Patients.objects.all()
+    serializer_class = PatientsSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser]

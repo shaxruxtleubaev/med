@@ -4,50 +4,21 @@ from page.models import (
     Specializations,
     Doctors, 
     ServicesCategories,
-    Services
+    Services,
+    Patients
 )
 
 class SpecializationsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Specializations
-        fields = (
-            'id',
-            'name',
-        )
+        fields = '__all__'
 
 class DoctorsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctors
-        fields = (
-            'id',
-            'first_name',
-            'last_name',
-            'email',
-            'contact_number',
-            'password',
-            'confirm_password',
-            'dob',
-            'specialization',
-            'experience_in_year',
-            'gender',
-            'profile_picture',
-            'monday',
-            'tuesday',
-            'wednesday',
-            'thursday',
-            'friday',
-            'saturday',
-            'sunday',
-            'status',
-            'address1',
-            'address2',
-            'country',
-            'state',
-            'city',
-            'postal_code',
-        )
+        fields = '__all__'
     
     def to_representation(self, instance):
         response = super().to_representation(instance)
@@ -59,24 +30,13 @@ class ServicesCategoriesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ServicesCategories
-        fields = (
-            'id',
-            'name',
-        )
+        fields = '__all__'
     
 class ServicesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Services
-        fields = (
-            'id',
-            'name',
-            'category',
-            'doctors',
-            'short_description',
-            'icon',
-            'status',
-        )
+        fields = '__all__'
     
     def to_representation(self, instance):
         response = super().to_representation(instance)
@@ -85,11 +45,14 @@ class ServicesSerializer(serializers.ModelSerializer):
 
         return response
 
+class PatientsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Patients
+        fields = '__all__'
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = (
-            'id',
-            'username',
-        )
+        fields = '__all__'

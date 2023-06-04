@@ -1,4 +1,5 @@
 from django.db.models import *
+import uuid
 
 class Specializations(Model):
 
@@ -228,3 +229,110 @@ class Services(Model):
 
         verbose_name = 'service'
         verbose_name_plural = 'services'
+
+class Patients(Model):
+
+    first_name = CharField(
+        'First Name',
+        max_length=100
+    )
+
+    last_name = CharField(
+        'Last Name',
+        max_length=100
+    )
+
+    unique_id = UUIDField(
+        'Patient Unique ID',
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
+
+    email = EmailField(
+        'Email',
+    )
+
+    password = CharField(
+        'Password',
+        max_length=100
+    )
+
+    confirm_password = CharField(
+        'Confirm Password',
+        max_length=100
+    )
+
+    contact_number = CharField(
+        'Contact number (optional)',
+        max_length=13
+    )
+
+    GENDER_CHOICES = (
+        ("Male", "Male"),
+        ("Female", "Female")
+    )
+
+    gender = CharField(
+        'Gender',
+        max_length=50,
+        choices = GENDER_CHOICES
+    )
+
+    dob = DateField(
+        'Date of birth (optional)'
+    )
+
+    profile_picture = ImageField(
+        'Profile picture',
+        upload_to='patients-profile-pictures'
+    )
+
+    address1 = CharField(
+        'Address 1 (optional)',
+        max_length=150,
+        blank=True,
+        null=True
+    )
+
+    address2 = CharField(
+        'Address 2 (optional)',
+        max_length=150,
+        blank=True,
+        null=True
+    )
+
+    COUNTRIES = (
+        ('UZ', 'Uzbekistan'),
+        ('KR', 'Karakalpakistan'),
+        ('KZ', 'Kazakhstan'),
+        ('RU', 'Russia')
+    )
+
+    country = CharField(
+        'Country (optional)',
+        max_length=50,
+        choices=COUNTRIES,
+        blank=True,
+        null=True
+    )
+
+    state = CharField(
+        'State (optional)',
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    city = CharField(
+        'City (optional)',
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    postal_code = IntegerField(
+        'Postal Code (optional)',
+        blank=True,
+        null=True
+    )
