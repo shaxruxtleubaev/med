@@ -30,8 +30,9 @@ class Doctors(Model):
         'Email'
     )
 
-    contact_number = IntegerField(
-        'Contact Number',
+    contact_number = CharField(
+        'Contact Number (optional)',
+        max_length=13,
         blank=True,
         null=True
     )
@@ -47,7 +48,7 @@ class Doctors(Model):
     )
 
     dob = DateField(
-        'DOB',
+        'Date of birth (optional)',
         blank=True,
         null=True
     )
@@ -58,14 +59,14 @@ class Doctors(Model):
     )
 
     experience_in_year = IntegerField(
-        'Experience In Year',
+        'Experience in Year (optional)',
         blank=True,
         null=True
     )
 
     GENDER_CHOICES = (
-        ("ML", "Male"),
-        ("FM", "Female")
+        ("Male", "Male"),
+        ("Female", "Female")
     )
 
     gender = CharField(
@@ -120,14 +121,14 @@ class Doctors(Model):
     )
 
     address1 = CharField(
-        'Address 1',
+        'Address 1 (optional)',
         max_length=150,
         blank=True,
         null=True
     )
 
     address2 = CharField(
-        'Address 2',
+        'Address 2 (optional)',
         max_length=150,
         blank=True,
         null=True
@@ -141,7 +142,7 @@ class Doctors(Model):
     )
 
     country = CharField(
-        'Country',
+        'Country (optional)',
         max_length=50,
         choices=COUNTRIES,
         blank=True,
@@ -149,21 +150,21 @@ class Doctors(Model):
     )
 
     state = CharField(
-        'State',
+        'State (optional)',
         max_length=50,
         blank=True,
         null=True
     )
 
     city = CharField(
-        'City',
+        'City (optional)',
         max_length=50,
         blank=True,
         null=True
     )
 
     postal_code = IntegerField(
-        'Postal Code',
+        'Postal Code (optional)',
         blank=True,
         null=True
     )
@@ -178,7 +179,7 @@ class Doctors(Model):
 class ServicesCategories(Model):
 
     name = CharField(
-        'Name',
+        'Name of the category of the service',
         max_length=100
     )
 
@@ -192,7 +193,7 @@ class ServicesCategories(Model):
 class Services(Model):
 
     name = CharField(
-        'Name',
+        'Name of the service',
         max_length=50
     )
 
