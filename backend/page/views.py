@@ -1,5 +1,14 @@
 from django.shortcuts import render
+from .models import (
+    Specializations,
+    Doctors,
+    ServicesCategories,
+    Services,
+    Patients,
+    StaffsRoles,
+    Staffs,
+    Visits
+)
 
 def page(request):
-    context = {}
-    return render(request, 'base.html', context)
+    return render(request, 'base.html')

@@ -5,7 +5,10 @@ from page.models import (
     Doctors, 
     ServicesCategories,
     Services,
-    Patients
+    Patients,
+    StaffsRoles,
+    Staffs,
+    Visits
 )
 
 class SpecializationsSerializer(serializers.ModelSerializer):
@@ -56,3 +59,34 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = '__all__'
+
+class StaffsRolesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StaffsRoles
+        fields = '__all__'
+
+class StaffsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Staffs
+        fields = '__all__'
+    
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['role'] = instance.role.name
+
+        return response
+
+class VisitsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Visits
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['doctor'] = instance.doctor.first_name + ' ' + instance.doctor.last_name
+        response['patient'] = instance.patient.first_name + ' ' + instance.patient.last_name
+
+        return response
