@@ -23,11 +23,11 @@ class DoctorsSerializer(serializers.ModelSerializer):
         model = Doctors
         fields = '__all__'
     
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['specialization'] = instance.specialization.name
+    # def to_representation(self, instance):
+    #     response = super().to_representation(instance)
+    #     response['specialization'] = instance.specialization.name
 
-        return response
+    #     return response
 
 class ServicesCategoriesSerializer(serializers.ModelSerializer):
 
@@ -41,12 +41,12 @@ class ServicesSerializer(serializers.ModelSerializer):
         model = Services
         fields = '__all__'
     
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['category'] = instance.category.name
-        response['doctors'] = instance.doctors.first_name + ' ' + instance.doctors.last_name
+    # def to_representation(self, instance):
+    #     response = super().to_representation(instance)
+    #     response['category'] = instance.category.name
+    #     response['doctors'] = instance.doctors.first_name + ' ' + instance.doctors.last_name
 
-        return response
+    #     return response
 
 class PatientsSerializer(serializers.ModelSerializer):
 
@@ -72,11 +72,11 @@ class StaffsSerializer(serializers.ModelSerializer):
         model = Staffs
         fields = '__all__'
     
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['role'] = instance.role.name
+    # def to_representation(self, instance):
+    #     response = super().to_representation(instance)
+    #     response['role'] = instance.role.name
 
-        return response
+    #     return response
 
 class VisitsSerializer(serializers.ModelSerializer):
 
@@ -84,9 +84,9 @@ class VisitsSerializer(serializers.ModelSerializer):
         model = Visits
         fields = '__all__'
 
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['doctor'] = instance.doctor.first_name + ' ' + instance.doctor.last_name
-        response['patient'] = instance.patient.first_name + ' ' + instance.patient.last_name
+    # def to_representation(self, instance):
+    #     response = super().to_representation(instance)
+    #     response['doctor'] = instance.doctor.first_name + ' ' + instance.doctor.last_name
+    #     response['patient'] = instance.patient.first_name + ' ' + instance.patient.last_name
 
-        return response
+    #     return response

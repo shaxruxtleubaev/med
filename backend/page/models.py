@@ -59,7 +59,7 @@ class Doctors(Model):
         on_delete=CASCADE
     )
 
-    experience_in_year = IntegerField(
+    experience_in_year = PositiveIntegerField(
         'Experience in Year (optional)',
         blank=True,
         null=True
@@ -136,10 +136,10 @@ class Doctors(Model):
     )
 
     COUNTRIES = (
-        ('UZ', 'Uzbekistan'),
-        ('KR', 'Karakalpakistan'),
-        ('KZ', 'Kazakhstan'),
-        ('RU', 'Russia')
+        ('Uzbekistan', 'Uzbekistan'),
+        ('Karakalpakistan', 'Karakalpakistan'),
+        ('Kazakhstan', 'Kazakhstan'),
+        ('Russia', 'Russia')
     )
 
     country = CharField(
@@ -164,7 +164,7 @@ class Doctors(Model):
         null=True
     )
 
-    postal_code = IntegerField(
+    postal_code = PositiveIntegerField(
         'Postal Code (optional)',
         blank=True,
         null=True
@@ -331,7 +331,7 @@ class Patients(Model):
         null=True
     )
 
-    postal_code = IntegerField(
+    postal_code = PositiveIntegerField(
         'Postal Code (optional)',
         blank=True,
         null=True

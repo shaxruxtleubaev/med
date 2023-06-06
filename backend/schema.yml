@@ -484,6 +484,13 @@ paths:
   /api/v1/doctors/:
     get:
       operationId: v1_doctors_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
       tags:
       - v1
       security:
@@ -494,9 +501,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Doctors'
+                $ref: '#/components/schemas/PaginatedDoctorsList'
           description: ''
     post:
       operationId: v1_doctors_create
@@ -628,9 +633,16 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/v1/services/:
+  /api/v1/patients/:
     get:
-      operationId: v1_services_list
+      operationId: v1_patients_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
       tags:
       - v1
       security:
@@ -641,9 +653,159 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/PaginatedPatientsList'
+          description: ''
+    post:
+      operationId: v1_patients_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patients'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Patients'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Patients'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patients'
+          description: ''
+  /api/v1/patients/{id}/:
+    get:
+      operationId: v1_patients_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patients'
+          description: ''
+    put:
+      operationId: v1_patients_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patients'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Patients'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Patients'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patients'
+          description: ''
+    patch:
+      operationId: v1_patients_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPatients'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPatients'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPatients'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patients'
+          description: ''
+    delete:
+      operationId: v1_patients_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this patient.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/services/:
+    get:
+      operationId: v1_services_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedServicesList'
           description: ''
     post:
       operationId: v1_services_create
@@ -674,6 +836,13 @@ paths:
   /api/v1/services-categories/:
     get:
       operationId: v1_services_categories_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
       tags:
       - v1
       security:
@@ -684,9 +853,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ServicesCategories'
+                $ref: '#/components/schemas/PaginatedServicesCategoriesList'
           description: ''
     post:
       operationId: v1_services_categories_create
@@ -925,6 +1092,13 @@ paths:
   /api/v1/specializations/:
     get:
       operationId: v1_specializations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
       tags:
       - v1
       security:
@@ -935,9 +1109,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Specializations'
+                $ref: '#/components/schemas/PaginatedSpecializationsList'
           description: ''
     post:
       operationId: v1_specializations_create
@@ -1069,9 +1241,16 @@ paths:
       responses:
         '204':
           description: No response body
-  /api/v1/users/:
+  /api/v1/staffs/:
     get:
-      operationId: v1_users_list
+      operationId: v1_staffs_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
       tags:
       - v1
       security:
@@ -1082,9 +1261,309 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/PaginatedStaffsList'
+          description: ''
+    post:
+      operationId: v1_staffs_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Staffs'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Staffs'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Staffs'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staffs'
+          description: ''
+  /api/v1/staffs-roles/:
+    get:
+      operationId: v1_staffs_roles_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStaffsRolesList'
+          description: ''
+    post:
+      operationId: v1_staffs_roles_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffsRoles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StaffsRoles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StaffsRoles'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffsRoles'
+          description: ''
+  /api/v1/staffs-roles/{id}/:
+    get:
+      operationId: v1_staffs_roles_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this staffs role.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffsRoles'
+          description: ''
+    put:
+      operationId: v1_staffs_roles_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this staffs role.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffsRoles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StaffsRoles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StaffsRoles'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffsRoles'
+          description: ''
+    patch:
+      operationId: v1_staffs_roles_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this staffs role.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffsRoles'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffsRoles'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffsRoles'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffsRoles'
+          description: ''
+    delete:
+      operationId: v1_staffs_roles_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this staffs role.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/staffs/{id}/:
+    get:
+      operationId: v1_staffs_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sraff.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staffs'
+          description: ''
+    put:
+      operationId: v1_staffs_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sraff.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Staffs'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Staffs'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Staffs'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staffs'
+          description: ''
+    patch:
+      operationId: v1_staffs_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sraff.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffs'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffs'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStaffs'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staffs'
+          description: ''
+    delete:
+      operationId: v1_staffs_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sraff.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/users/:
+    get:
+      operationId: v1_users_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUserList'
           description: ''
     post:
       operationId: v1_users_create
@@ -1216,23 +1695,163 @@ paths:
       responses:
         '204':
           description: No response body
+  /api/v1/visits/:
+    get:
+      operationId: v1_visits_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVisitsList'
+          description: ''
+    post:
+      operationId: v1_visits_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Visits'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Visits'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Visits'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visits'
+          description: ''
+  /api/v1/visits/{id}/:
+    get:
+      operationId: v1_visits_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this visit.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visits'
+          description: ''
+    put:
+      operationId: v1_visits_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this visit.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Visits'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Visits'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Visits'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visits'
+          description: ''
+    patch:
+      operationId: v1_visits_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this visit.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVisits'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVisits'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVisits'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visits'
+          description: ''
+    delete:
+      operationId: v1_visits_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this visit.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
 components:
   schemas:
     BlankEnum:
       enum:
       - ''
-    CountryEnum:
-      enum:
-      - UZ
-      - KR
-      - KZ
-      - RU
-      type: string
-      description: |-
-        * `UZ` - Uzbekistan
-        * `KR` - Karakalpakistan
-        * `KZ` - Kazakhstan
-        * `RU` - Russia
     Doctors:
       type: object
       properties:
@@ -1265,8 +1884,6 @@ components:
           format: date
           nullable: true
           title: Date of birth (optional)
-        specialization:
-          type: integer
         experience_in_year:
           type: integer
           nullable: true
@@ -1306,7 +1923,7 @@ components:
           nullable: true
           title: Country (optional)
           oneOf:
-          - $ref: '#/components/schemas/CountryEnum'
+          - $ref: '#/components/schemas/DoctorsCountryEnum'
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
         state:
@@ -1323,6 +1940,8 @@ components:
           type: integer
           nullable: true
           title: Postal Code (optional)
+        specialization:
+          type: integer
       required:
       - confirm_password
       - email
@@ -1333,6 +1952,18 @@ components:
       - password
       - profile_picture
       - specialization
+    DoctorsCountryEnum:
+      enum:
+      - Uzbekistan
+      - Karakalpakistan
+      - Kazakhstan
+      - Russia
+      type: string
+      description: |-
+        * `Uzbekistan` - Uzbekistan
+        * `Karakalpakistan` - Karakalpakistan
+        * `Kazakhstan` - Kazakhstan
+        * `Russia` - Russia
     GenderEnum:
       enum:
       - Male
@@ -1356,6 +1987,186 @@ components:
     NullEnum:
       enum:
       - null
+    PaginatedDoctorsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Doctors'
+    PaginatedPatientsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Patients'
+    PaginatedServicesCategoriesList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServicesCategories'
+    PaginatedServicesList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Services'
+    PaginatedSpecializationsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Specializations'
+    PaginatedStaffsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Staffs'
+    PaginatedStaffsRolesList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/StaffsRoles'
+    PaginatedUserList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    PaginatedVisitsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Visits'
     PasswordChange:
       type: object
       properties:
@@ -1428,8 +2239,6 @@ components:
           format: date
           nullable: true
           title: Date of birth (optional)
-        specialization:
-          type: integer
         experience_in_year:
           type: integer
           nullable: true
@@ -1469,7 +2278,80 @@ components:
           nullable: true
           title: Country (optional)
           oneOf:
-          - $ref: '#/components/schemas/CountryEnum'
+          - $ref: '#/components/schemas/DoctorsCountryEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        state:
+          type: string
+          nullable: true
+          title: State (optional)
+          maxLength: 50
+        city:
+          type: string
+          nullable: true
+          title: City (optional)
+          maxLength: 50
+        postal_code:
+          type: integer
+          nullable: true
+          title: Postal Code (optional)
+        specialization:
+          type: integer
+    PatchedPatients:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        unique_id:
+          type: string
+          format: uuid
+          readOnly: true
+          title: Patient Unique ID
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          maxLength: 20
+        confirm_password:
+          type: string
+          maxLength: 20
+        contact_number:
+          type: string
+          title: Contact number (optional)
+          maxLength: 13
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        dob:
+          type: string
+          format: date
+          title: Date of birth (optional)
+        profile_picture:
+          type: string
+          format: uri
+        address1:
+          type: string
+          nullable: true
+          title: Address 1 (optional)
+          maxLength: 150
+        address2:
+          type: string
+          nullable: true
+          title: Address 2 (optional)
+          maxLength: 150
+        country:
+          nullable: true
+          title: Country (optional)
+          oneOf:
+          - $ref: '#/components/schemas/PatientsCountryEnum'
           - $ref: '#/components/schemas/BlankEnum'
           - $ref: '#/components/schemas/NullEnum'
         state:
@@ -1496,10 +2378,6 @@ components:
           type: string
           title: Name of the service
           maxLength: 50
-        category:
-          type: integer
-        doctors:
-          type: integer
         short_description:
           type: string
         icon:
@@ -1507,6 +2385,10 @@ components:
           format: uri
         status:
           type: boolean
+        category:
+          type: integer
+        doctors:
+          type: integer
     PatchedServicesCategories:
       type: object
       properties:
@@ -1526,18 +2408,112 @@ components:
         name:
           type: string
           maxLength: 100
+    PatchedStaffs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        contact_number:
+          type: string
+          nullable: true
+          title: Contact Number (optional)
+          maxLength: 13
+        password:
+          type: string
+          nullable: true
+          maxLength: 20
+        confirm_password:
+          type: string
+          nullable: true
+          title: Confirm Pasword
+          maxLength: 20
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        profile_picture:
+          type: string
+          format: uri
+        role:
+          type: integer
+    PatchedStaffsRoles:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          title: Staff Role
+          maxLength: 50
     PatchedUser:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        password:
+          type: string
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
         username:
           type: string
           description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
             only.
           pattern: ^[\w.@+-]+$
           maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
     PatchedUserDetails:
       type: object
       description: User model w/o password
@@ -1563,6 +2539,118 @@ components:
         last_name:
           type: string
           maxLength: 150
+    PatchedVisits:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        visit_date:
+          type: string
+          format: date
+        description:
+          type: string
+          nullable: true
+          title: Description (optional)
+        doctor:
+          type: integer
+        patient:
+          type: integer
+    Patients:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        unique_id:
+          type: string
+          format: uuid
+          readOnly: true
+          title: Patient Unique ID
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          maxLength: 20
+        confirm_password:
+          type: string
+          maxLength: 20
+        contact_number:
+          type: string
+          title: Contact number (optional)
+          maxLength: 13
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        dob:
+          type: string
+          format: date
+          title: Date of birth (optional)
+        profile_picture:
+          type: string
+          format: uri
+        address1:
+          type: string
+          nullable: true
+          title: Address 1 (optional)
+          maxLength: 150
+        address2:
+          type: string
+          nullable: true
+          title: Address 2 (optional)
+          maxLength: 150
+        country:
+          nullable: true
+          title: Country (optional)
+          oneOf:
+          - $ref: '#/components/schemas/PatientsCountryEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+          - $ref: '#/components/schemas/NullEnum'
+        state:
+          type: string
+          nullable: true
+          title: State (optional)
+          maxLength: 50
+        city:
+          type: string
+          nullable: true
+          title: City (optional)
+          maxLength: 50
+        postal_code:
+          type: integer
+          nullable: true
+          title: Postal Code (optional)
+      required:
+      - confirm_password
+      - contact_number
+      - dob
+      - email
+      - first_name
+      - gender
+      - id
+      - last_name
+      - password
+      - profile_picture
+      - unique_id
+    PatientsCountryEnum:
+      enum:
+      - UZ
+      - KR
+      - KZ
+      - RU
+      type: string
+      description: |-
+        * `UZ` - Uzbekistan
+        * `KR` - Karakalpakistan
+        * `KZ` - Kazakhstan
+        * `RU` - Russia
     Register:
       type: object
       properties:
@@ -1607,10 +2695,6 @@ components:
           type: string
           title: Name of the service
           maxLength: 50
-        category:
-          type: integer
-        doctors:
-          type: integer
         short_description:
           type: string
         icon:
@@ -1618,6 +2702,10 @@ components:
           format: uri
         status:
           type: boolean
+        category:
+          type: integer
+        doctors:
+          type: integer
       required:
       - category
       - doctors
@@ -1650,6 +2738,64 @@ components:
       required:
       - id
       - name
+    Staffs:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        contact_number:
+          type: string
+          nullable: true
+          title: Contact Number (optional)
+          maxLength: 13
+        password:
+          type: string
+          nullable: true
+          maxLength: 20
+        confirm_password:
+          type: string
+          nullable: true
+          title: Confirm Pasword
+          maxLength: 20
+        gender:
+          $ref: '#/components/schemas/GenderEnum'
+        profile_picture:
+          type: string
+          format: uri
+        role:
+          type: integer
+      required:
+      - email
+      - first_name
+      - gender
+      - id
+      - last_name
+      - profile_picture
+      - role
+    StaffsRoles:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          title: Staff Role
+          maxLength: 50
+      required:
+      - id
     Token:
       type: object
       description: Serializer for Token model.
@@ -1665,14 +2811,61 @@ components:
         id:
           type: integer
           readOnly: true
+        password:
+          type: string
+          maxLength: 128
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
         username:
           type: string
           description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
             only.
           pattern: ^[\w.@+-]+$
           maxLength: 150
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        groups:
+          type: array
+          items:
+            type: integer
+          description: The groups this user belongs to. A user will get all permissions
+            granted to each of their groups.
+        user_permissions:
+          type: array
+          items:
+            type: integer
+          description: Specific permissions for this user.
       required:
       - id
+      - password
       - username
     UserDetails:
       type: object
@@ -1711,6 +2904,28 @@ components:
           writeOnly: true
       required:
       - key
+    Visits:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        visit_date:
+          type: string
+          format: date
+        description:
+          type: string
+          nullable: true
+          title: Description (optional)
+        doctor:
+          type: integer
+        patient:
+          type: integer
+      required:
+      - doctor
+      - id
+      - patient
+      - visit_date
   securitySchemes:
     cookieAuth:
       type: apiKey

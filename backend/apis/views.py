@@ -50,7 +50,7 @@ class PatientsViewSet(viewsets.ModelViewSet):
 class StaffsRolesViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
     queryset = StaffsRoles.objects.all()
-    serializer_class = StaffsRoles
+    serializer_class = StaffsRolesSerializer
 
 class StaffsViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
