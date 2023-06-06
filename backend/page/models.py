@@ -449,3 +449,10 @@ class Visits(Model):
         blank=True,
         null=True
     )
+
+    def __str__(self):
+        return f'{self.patient}'
+    
+    class Meta:
+        verbose_name = 'visit'
+        verbose_name_plural = 'visits'
