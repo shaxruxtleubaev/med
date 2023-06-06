@@ -344,8 +344,6 @@ class Patients(Model):
         verbose_name = 'patient'
         verbose_name_plural = 'patients'
 
-############################################################################
-
 class StaffsRoles(Model):
 
     name = CharField(
