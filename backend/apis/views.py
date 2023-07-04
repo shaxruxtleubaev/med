@@ -23,46 +23,46 @@ from .serializers import (
 )
 
 class SpecializationsViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Specializations.objects.all()
     serializer_class = SpecializationsSerializer
 
 class DoctorsViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Doctors.objects.all()
     serializer_class = DoctorsSerializer
 
 class ServicesCategoriesViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = ServicesCategories.objects.all()
     serializer_class = ServicesCategoriesSerializer
 
 class ServicesViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Services.objects.all()
     serializer_class = ServicesSerializer
 
 class PatientsViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Patients.objects.all()
     serializer_class = PatientsSerializer
 
 class StaffsRolesViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = StaffsRoles.objects.all()
     serializer_class = StaffsRolesSerializer
 
 class StaffsViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Staffs.objects.all()
     serializer_class = StaffsSerializer
 
 class VisitsViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.AllowAny,)
     queryset = Visits.objects.all()
     serializer_class = VisitsSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.AllowAny]
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
