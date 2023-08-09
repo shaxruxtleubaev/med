@@ -12,7 +12,7 @@ urlpatterns = [
 
     # Main pages
     path('admin/', admin.site.urls),
-    path('adminn/', include('page.urls')),
+    # path('adminn/', include('page.urls')),
 
     # API
     path('api/v1/', include('apis.urls')),

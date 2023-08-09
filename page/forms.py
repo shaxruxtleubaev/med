@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+"""from django.forms import ModelForm
 from .models import (
     Specializations,
     Doctors,
@@ -32,4 +32,4 @@ class ServicesForm(ModelForm):
 
     class Meta:
         model = Services
-        fields = '__all__'
+        fields = '__all__'"""

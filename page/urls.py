@@ -1,4 +1,4 @@
-from django.urls import path
+"""from django.urls import path
 from .views import (
     page,
     admin_dashboard,
@@ -61,5 +61,5 @@ urlpatterns = [
     path('services-categories/create/', admin_services_categories_create, name='services_categories_create'),
     path('services-categories/<int:pk>/edit/', admin_services_categories_edit, name='admin_services_categories_edit'),
     path('services-categories/<int:pk>/delete/', admin_services_categories_delete, name='admin_services_categories_delete'),
-
 ]
+"""

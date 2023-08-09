@@ -3,7 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a+24)g46tq+4i&09qefe!%os-tdipdmud*wx!$npr$5x=+)0ek'
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -44,14 +44,14 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 5
 }
         
 SPECTACULAR_SETTINGS = {
     "TITLE": "Med API Project",
     "DESCRIPTION": "A sample med to learn develop DRF",
-    "VERSION": "1.0.0",
+    "VERSION": "1.1",
 }
 
 MIDDLEWARE = [
@@ -69,9 +69,15 @@ MIDDLEWARE = [
 #3rd party
 CORS_ALLOWED_ORIGINS = (
     "http://localhost:3000",
+    "http://localhost:5500",
     "http://localhost:8000",
 )
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:5500",
+    "http://localhost:8000",
+]
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'src.urls'
 

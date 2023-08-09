@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+"""from django.shortcuts import render, redirect
 from .models import (
     Specializations,
     Doctors,
@@ -248,4 +248,4 @@ def admin_services_categories_delete(request, pk):
     service_category = ServicesCategories.objects.get(id=pk)
     service_category.delete()
 
-    return redirect('/adminn/services-categories/')
+    return redirect('/adminn/services-categories/')"""
