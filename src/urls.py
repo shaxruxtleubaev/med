@@ -15,9 +15,9 @@ urlpatterns = [
     # path('adminn/', include('page.urls')),
 
     # API
-    path('api/v1/', include('apis.urls')),
-    path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('api/v1/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/', include('apis.urls')),
+    path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc',),
